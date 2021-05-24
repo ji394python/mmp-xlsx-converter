@@ -52,7 +52,7 @@ colNames = ['識別碼','完成百分比','項目名稱','工期','開始時間'
 subColNames = ['CUB-PM','CUB-IT','CUB-AF','CUB-TF','CUB-TFM','SAS-PM','SAS-AF','SAS-TF','SAS-TFM']
 
 #Date Control
-month = {'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,
+month = {'一':1,'二':2,'三':y ,'四':4,'五':5,'六':6,
         '七':7,'八':8,'九':9,'十':10,'十一':11,'十二':12}
 
 #Milestone Color
@@ -65,6 +65,7 @@ def main(df,fileName):
     try:
         #Dataframe handle
         #df = pd.read_excel('before.xlsx',engine='openpyxl').fillna('').drop(['作用中','任務模式'],axis=1)
+        # df = pd.read_excel('CUB SFM_M Project_20210524_v1.3.xlsx',engine='openpyxl').fillna('').drop(['作用中','任務模式'],axis=1)
         beforeColNames = df.columns.values.tolist()
         beforeColNames[1] = '項目名稱'
         df.columns = beforeColNames
@@ -131,7 +132,6 @@ def main(df,fileName):
         #worksheet.write_datetime(2,2,datetime.strptime(df['開始時間'].values[0],'%m月 %d, %Y'),date_format)
 
         row = 2
-
         for item in df.iterrows():
             index = item[0]
             item = item[1]
@@ -142,7 +142,7 @@ def main(df,fileName):
             worksheet.set_row(row,None,workbook.add_format({'bg_color':bgColor}),{'level':indent} ) if bgColor != '' else worksheet.set_row(row,None,None,{'level':indent} )
 
             for k,v in item.items():
-                if k == '附註': continue
+                if k in ['附註','資源名稱']: continue
                 col = colNames.index(k)
                 col = col+8 if col in [7,8] else col
                 temp_format = dict_format[k].copy()
@@ -161,16 +161,39 @@ def main(df,fileName):
                     worksheet.write(row, col,v,temp)
             row+=1
 
+            # try:
+            #     v = task[item['項目名稱']]
+            #     temp_tick = tick.copy()
+            #     if bgColor != '':
+            #         temp_tick['bg_color'] = bgColor
+            #     else:
+            #         pass
+            #     temp = workbook.add_format(temp_tick)
+            #     for col in range(len(v)):
+            #         worksheet.write(row-1, col+6,v[col],temp)
+            # except:
+            #     continue
             try:
-                v = task[item['項目名稱']]
                 temp_tick = tick.copy()
+                teams_temp = item['資源名稱'].split(',')
+
+                if ( (len(teams_temp) != 1) & (teams_temp[0] != '')):
+                    teams = teams_temp
+                    teams_order = item['大綱階層']
+                    teams_index = index
+                
+                if ((teams_index != index) & (teams_order >= item['大綱階層']) ):
+                    teams = ['']
+
                 if bgColor != '':
                     temp_tick['bg_color'] = bgColor
                 else:
                     pass
                 temp = workbook.add_format(temp_tick)
-                for col in range(len(v)):
-                    worksheet.write(row-1, col+6,v[col],temp)
+                for team in teams:
+                    if team == '': continue
+                    col = subColNames.index(team)
+                    worksheet.write(row-1, col+6,'ü',temp)
             except:
                 continue
 
@@ -194,7 +217,7 @@ btn_sign_up.place(x=195, y=255)
 
 file = tk.filedialog.askopenfile(parent=window,mode='rb',title='Choose a xlsx file')
 fileName = os.path.basename(file.name)
-globals()['fileName'] = fileName[:fileName.find('.xlsx')]
+globals()['fileName'] = fileName[:fileName.find('.xlsx')]   
 if file != None:
     try:
         df = pd.read_excel(file,engine='openpyxl').fillna('').drop(['作用中','任務模式'],axis=1)
