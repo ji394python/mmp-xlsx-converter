@@ -1,9 +1,7 @@
 # SAS-Project-Convert
 
-
-![Image of Yaktocat](https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png)
 <p align="center">
-  <img width="460" height="300" src="https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png">
+  ![Image of Yaktocat](https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png)
 </p>
 
 ## 使用目的
