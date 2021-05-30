@@ -2,6 +2,9 @@
 
 
 ![Image of Yaktocat](https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png)
+<p align="center">
+  <img width="460" height="300" src="https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png">
+</p>
 
 ## 使用目的
 - 將mmp轉換之原始xlsx檔透過此程式解決跑版、轉換問題
