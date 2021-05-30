@@ -58,9 +58,6 @@ month = {'一':1,'二':2,'三':y ,'四':4,'五':5,'六':6,
 #Milestone Color
 milestoneColor = {'AF':'#ffff00','TF':'#FABF94','TFM':'#92D050'}
 
-## will be updated
-task = json.load(open('ddr/task.json','r',encoding='utf-8'))
-
 def main(df,fileName):
     try:
         #Dataframe handle
