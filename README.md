@@ -1,10 +1,8 @@
 # SAS-Project-Convert
 
 <p align="center">
-  ![Image of Yaktocat](https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png)
+  <img src="https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png">
 </p>
-
-![Image of Yaktocat](https://github.com/ji394python/mmp-xlsx-converter/blob/master/img/UI.png)
 
 ## 使用目的
 - 將mmp轉換之原始xlsx檔透過此程式解決跑版、轉換問題
